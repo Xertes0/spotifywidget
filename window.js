@@ -55,8 +55,12 @@ function update(){
 
         const name = data["item"]["name"]
         artists = ""
-        for(i = 0; i<data["item"]["artists"].length; i++){
-            artists += data["item"]["artists"][i]["name"] + ", "
+        if(data["item"]["artists"].length == 1){
+            artists = data["item"]["artists"][0]["name"]
+        }else{
+            for(i = 0; i<data["item"]["artists"].length; i++){
+                artists += data["item"]["artists"][i]["name"] + ", "
+            }
         }
 
         const album = data["item"]["album"]["name"]
