@@ -8,7 +8,7 @@ const json = JSON.parse(data)
 const client_id = json["client_id"]
 const client_secret = json["client_secret"]
 
-if(client_secret == "Your Client secret"){
+if(client_secret == "Your client secret"){
     console.error("Put your client id and client secret (https://developer.spotify.com/dashboard) to the data.json file!")
 }
 
