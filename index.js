@@ -2,7 +2,17 @@ const electron = require("electron")
 const {screen, app, BrowserWindow } = require("electron")
 const fs = require("fs")
 
-const data = fs.readFileSync("data.json")
+let data_path = "data.json"
+
+console.log(process.argv)
+
+if(process.argv.includes("--data")){
+    data_path = process.argv[process.argv.indexOf("--data") + 1]
+}
+
+console.log(data_path)
+
+const data = fs.readFileSync(data_path)
 const json = JSON.parse(data)
 
 const client_id = json["client_id"]
