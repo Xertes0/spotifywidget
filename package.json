@@ -1,0 +1,16 @@
+{
+  "name": "spotifywidget",
+  "version": "1.0.0",
+  "description": "Spotify Widget",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev"
+  },
+  "author": "Xertes0",
+  "license": "GNU GPL v3.0",
+  "devDependencies": {
+    "electron": "^9.2.0"
+  },
+  "dependencies": {}
+}
