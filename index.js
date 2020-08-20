@@ -6,8 +6,8 @@ let data_path = "data.json"
 
 console.log(process.argv)
 
-if(process.argv.includes("--data")){
-    data_path = process.argv[process.argv.indexOf("--data") + 1]
+if(app.commandLine.hasSwitch("data")){
+    data_path = app.commandLine.getSwitchValue("data") // --data="path" NOT --data "path"
 }
 
 console.log(data_path)
