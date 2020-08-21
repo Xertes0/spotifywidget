@@ -1,6 +1,7 @@
 .data.json
 data.json
 notes.txt
+build
 
 # Created by https://www.toptal.com/developers/gitignore/api/linux,visualstudiocode,node,yarn
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,visualstudiocode,node,yarn
