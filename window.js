@@ -42,7 +42,7 @@ async function getTrack(){
 
     console.log(response)
     if(response.status == 204)
-        return "Noy playing"
+        return "Not playing"
     return response.json()
 }
 
