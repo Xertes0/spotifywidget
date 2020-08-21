@@ -42,14 +42,17 @@ async function getTrack(){
 
     console.log(response)
     if(response.status == 204)
-        return "Not today"
+        return "Noy playing"
     return response.json()
 }
 
 function update(){
     getTrack().then(data => {
         console.log(data)
-        if(data === "Not today"){
+        if(data === "Not playing"){
+            document.getElementById("title").innerHTML = "Currently Not Playing"
+            document.getElementById("artists").innerHTML = "Spotify"
+            document.getElementById("photo").src = "blank.png"
             return
         }
 

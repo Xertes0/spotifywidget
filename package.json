@@ -8,9 +8,10 @@
     "dev": "electron . --dev"
   },
   "author": "Xertes0",
-  "license": "GNU GPL v3.0",
+  "license": "GPL-3.0-only",
   "devDependencies": {
-    "electron": "^9.2.0"
+    "electron": "^9.2.0",
+    "electron-builder": "^22.8.0"
   },
   "dependencies": {}
 }
