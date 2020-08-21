@@ -2,7 +2,9 @@
 
 Works on Linux, MacOS was NOT tested.
 
-DOES NOT WORK ON WINDOWS
+DOES NOT WORK PROPERLY ON WINDOWS
+
+![Preview](https://i.imgur.com/KYJ3Nes.png)
 
 # Before Running
 
