@@ -16,6 +16,19 @@ Creating an application might be necessary.
 
 # Running
 
+After cloning the repository run these commands to install the dependencies:
+
+```
+npm install
+
+```
+
+For building:
+
+```
+yarn install
+```
+
 You can start the application with the following command:
 
 ```
