@@ -1,34 +1,31 @@
 {
-  "name": "spotifywidget",
-  "version": "1.0.0",
-  "description": "Spotify Widget",
-  "main": "index.js",
-  "scripts": {
-    "start": "electron .",
-    "dev": "electron . --dev",
-    "build": "electron-builder -l"
-  },
-  "author": "Xertes0",
-  "license": "GPL-3.0-only",
-  "build":{
-    "productName": "Spotify Widget",
-    "artifactName": "SpotifyWidget-${version}_${arch}",
-    "appId": "io.Xertes0.SpotifyWidget",
-    "directories": {
-      "app": "./",
-      "output": "./build"
-    },
-    "extraFiles": [
-      "./data.json"
-    ],
-    "linux": {
-      "target": "AppImage",
-      "category": "Utility"
-    }
-  },
-  "devDependencies": {
-    "electron": "^9.2.0",
-    "electron-builder": "^22.8.0"
-  },
-  "dependencies": {}
+	"name": "spotifywidget",
+	"version": "1.0.0",
+	"description": "Spotify Widget",
+	"main": "index.js",
+	"scripts": {
+		"start": "electron .",
+		"dev": "electron . --dev",
+		"build": "electron-builder -l"
+	},
+	"author": "Xertes0",
+	"license": "GPL-3.0-only",
+	"build": {
+		"productName": "Spotify Widget",
+		"artifactName": "SpotifyWidget-${version}_${arch}",
+		"appId": "io.Xertes0.SpotifyWidget",
+		"directories": {
+			"app": "./",
+			"output": "./build"
+		},
+		"linux": {
+			"target": "AppImage",
+			"category": "Utility"
+		}
+	},
+	"devDependencies": {
+		"electron": "^9.2.0",
+		"electron-builder": "^22.8.0"
+	},
+	"dependencies": {}
 }
