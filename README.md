@@ -20,7 +20,6 @@ After cloning the repository run these commands to install the dependencies:
 
 ```
 npm install
-
 ```
 
 For building:
