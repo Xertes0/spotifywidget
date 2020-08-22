@@ -95,7 +95,7 @@ function createWindow() {
 				height: winHeigh,
 				frame: false,
 				transparent: true,
-				type: "desktop",
+				type: "toolbar",
 				show: true,
 				webPreferences: {
 					nodeIntegration: true,
@@ -141,6 +141,7 @@ function createWindow() {
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
+	console.error("window all closed");
 	if (process.platform != "darwin") {
 		app.quit();
 	}
