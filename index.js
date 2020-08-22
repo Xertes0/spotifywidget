@@ -5,19 +5,19 @@ const fs = require("fs");
 let data;
 const config_path = process.env.HOME + "/.config/spotifywidget";
 
-if (app.commandLine.hasSwitch("data")) {
-	const data_path = app.commandLine.getSwitchValue("data");
+if (app.commandLine.hasSwitch("config")) {
+	const data_path = app.commandLine.getSwitchValue("config");
 	console.log(data_path);
 	data = fs.readFileSync(data_path);
 } else {
 	try {
-		data = fs.readFileSync(config_path + "/data.json");
+		data = fs.readFileSync(config_path + "/config.json");
 	} catch (err) {
 		try {
 			fs.mkdirSync(config_path);
 		} catch (err) {}
 		fs.writeFileSync(
-			config_path + "/data.json",
+			config_path + "/config.json",
 			'{"client_id": "Your client id","client_secret": "Your client secret","check_if_running": "false"}'
 		);
 
@@ -41,7 +41,7 @@ function no_data() {
 	console.error(
 		"Put your client id and client secret (https://developer.spotify.com/dashboard) to the " +
 			config_path +
-			"/data.json file!"
+			"/config.json file!"
 	);
 	app.quit();
 	return;
