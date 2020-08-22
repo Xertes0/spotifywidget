@@ -18,7 +18,7 @@ if (app.commandLine.hasSwitch("data")) {
 		} catch (err) {}
 		fs.writeFileSync(
 			config_path + "/data.json",
-			'{"client_id": "Your client id","client_secret": "Your client secret"}'
+			'{"client_id": "Your client id","client_secret": "Your client secret","check_if_running": "false"}'
 		);
 
 		no_data();
@@ -31,9 +31,8 @@ const json = JSON.parse(data);
 console.log(json);
 
 const client_id = json["client_id"];
-const client_secret = json["client_secret"];
 
-if (client_secret == "Your client secret") {
+if (client_id == "Your client id") {
 	no_data();
 	return;
 }
@@ -109,12 +108,7 @@ function createWindow() {
 		window.setPosition(screen.getPrimaryDisplay().size.width - winWidth, 0);
 		window.loadFile("window.html");
 		window.webContents.on("did-finish-load", () => {
-			window.webContents.send(
-				"loaded",
-				newUrl.slice(26),
-				client_id,
-				client_secret
-			);
+			window.webContents.send("loaded", newUrl.slice(26), json);
 		});
 		window.on("closed", () => {
 			window = null;

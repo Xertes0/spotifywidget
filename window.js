@@ -1,7 +1,11 @@
 const { ipcRenderer } = require("electron");
+const child_process = require("child_process");
+const { isRegExp } = require("util");
 
 var token = "";
 var ref_token = "";
+
+let check_if_running;
 
 async function getTokens(code, client_id, client_secret) {
 	const response = await window.fetch(
@@ -62,47 +66,58 @@ async function getTrack() {
 }
 
 function update() {
-	getTrack().then((data) => {
-		console.log(data);
-		if (data === "Not playing") {
-			document.getElementById("title").innerHTML = "Currently Not Playing";
-			document.getElementById("artists").innerHTML = "Spotify";
-			document.getElementById("photo").src = "blank.png";
-			return;
-		}
-
-		const name = data["item"]["name"];
-		let artists = "";
-		if (data["item"]["artists"].length == 1) {
-			artists = data["item"]["artists"][0]["name"];
-		} else {
-			for (i = 0; i < data["item"]["artists"].length; i++) {
-				artists += " " + data["item"]["artists"][i]["name"];
-				if (i < data["item"]["artists"].length - 1) artists += ",";
+	function update() {
+		getTrack().then((data) => {
+			console.log(data);
+			if (data === "Not playing") {
+				document.getElementById("title").innerHTML = "Currently Not Playing";
+				document.getElementById("artists").innerHTML = "Spotify";
+				document.getElementById("photo").src = "blank.png";
+				return;
 			}
-		}
 
-		const album = data["item"]["album"]["name"];
-		const photo = data["item"]["album"]["images"][0]["url"];
+			const name = data["item"]["name"];
+			let artists = "";
+			if (data["item"]["artists"].length == 1) {
+				artists = data["item"]["artists"][0]["name"];
+			} else {
+				for (i = 0; i < data["item"]["artists"].length; i++) {
+					artists += " " + data["item"]["artists"][i]["name"];
+					if (i < data["item"]["artists"].length - 1) artists += ",";
+				}
+			}
 
-		console.log(name);
-		console.log(artists);
-		console.log(album);
-		console.log(photo);
+			const album = data["item"]["album"]["name"];
+			const photo = data["item"]["album"]["images"][0]["url"];
 
-		document.getElementById("title").innerHTML = name;
-		document.getElementById("artists").innerHTML = artists;
-		document.getElementById("photo").src = photo;
-	});
+			console.log(name);
+			console.log(artists);
+			console.log(album);
+			console.log(photo);
+
+			document.getElementById("title").innerHTML = name;
+			document.getElementById("artists").innerHTML = artists;
+			document.getElementById("photo").src = photo;
+		});
+	}
+
+	// If specified in the config
+	// Check if spotify is running
+	if (check_if_running)
+		child_process.exec("/usr/bin/pgrep spotify", (err, stdout, sterr) => {
+			if (stdout != "" || !err) update();
+		});
+	else {
+		update();
+	}
 }
 
-ipcRenderer.on("loaded", (event, code, client_id, client_secret) => {
+ipcRenderer.on("loaded", (event, code, json) => {
 	console.log("ipcRenderer");
 	console.log(code);
-	console.log(client_id);
-	console.log(client_secret);
+	check_if_running = json["check_if_running"] == "true";
 
-	getTokens(code, client_id, client_secret).then((data) => {
+	getTokens(code, json["client_id"], json["client_secret"]).then((data) => {
 		console.log(data);
 
 		token = data["access_token"];

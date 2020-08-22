@@ -1,8 +1,6 @@
 # Spotify Widget
 
-Works on Linux, MacOS was NOT tested.
-
-DOES NOT WORK PROPERLY ON WINDOWS
+Works on Linux, MacOS and Windows were NOT tested.
 
 ![Preview](https://i.imgur.com/KYJ3Nes.png)
 

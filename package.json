@@ -12,15 +12,17 @@
 	"license": "GPL-3.0-only",
 	"build": {
 		"productName": "Spotify Widget",
-		"artifactName": "SpotifyWidget-${version}_${arch}",
+		"artifactName": "SpotifyWidget-${version}-${arch}",
 		"appId": "io.Xertes0.SpotifyWidget",
 		"directories": {
-			"app": "./",
 			"output": "./build"
 		},
 		"linux": {
 			"target": "AppImage",
 			"category": "Utility"
+		},
+		"win": {
+			"target": "zip"
 		}
 	},
 	"devDependencies": {
