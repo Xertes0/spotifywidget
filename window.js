@@ -103,7 +103,7 @@ function update() {
 
 	// If specified in the config
 	// Check if spotify is running
-	if (check_if_running)
+	if (process.platform == "linux" && check_if_running)
 		child_process.exec("/usr/bin/pgrep spotify", (err, stdout, sterr) => {
 			if (stdout != "" || !err) update();
 		});

@@ -3,7 +3,7 @@ const { screen, app, BrowserWindow } = require("electron");
 const fs = require("fs");
 
 let data;
-const config_path = process.env.HOME + "/.config/spotifywidget";
+const config_path = app.getPath("userData");
 
 if (app.commandLine.hasSwitch("config")) {
 	const data_path = app.commandLine.getSwitchValue("config");

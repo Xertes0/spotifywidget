@@ -6,13 +6,15 @@
 	"scripts": {
 		"start": "electron .",
 		"dev": "electron . --dev",
-		"build": "electron-builder -l"
+		"build": "electron-builder -l",
+		"buildW": "electron-builder -w",
+		"buildAll": "electron-builder -lw"
 	},
 	"author": "Xertes0",
 	"license": "GPL-3.0-only",
 	"build": {
 		"productName": "Spotify Widget",
-		"artifactName": "SpotifyWidget-${version}-${arch}",
+		"artifactName": "SpotifyWidget-${version}_${os}_${arch}",
 		"appId": "io.Xertes0.SpotifyWidget",
 		"directories": {
 			"output": "./build"
