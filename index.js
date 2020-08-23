@@ -1,9 +1,10 @@
 const electron = require("electron");
 const { screen, app, BrowserWindow } = require("electron");
 const fs = require("fs");
+const path = require("path");
 
 let data;
-const config_path = app.getPath("appData");
+const config_path = path.join(app.getPath("appData"), "spotifywidget");
 
 if (app.commandLine.hasSwitch("config")) {
 	const data_path = app.commandLine.getSwitchValue("config");
