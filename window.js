@@ -105,7 +105,7 @@ function update() {
 	// If specified in the config
 	// Check if spotify is running
 	if (process.platform == "linux" && check_if_running)
-		child_process.exec("/usr/bin/pgrep spotify", (err, stdout, sterr) => {
+		child_process.exec("/usr/bin/pgrep -x spotify", (err, stdout, sterr) => {
 			if (stdout != "" || !err) {
 				remote.getCurrentWindow().showInactive();
 				update();
