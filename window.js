@@ -117,6 +117,13 @@ ipcRenderer.on("loaded", (event, code, json) => {
 	console.log(code);
 	check_if_running = json["check_if_running"] == "true";
 
+	if (json["position"].split("-")[1] == "left") {
+		document.getElementById("main").style.marginLeft = "160px";
+		document.getElementById("photo-div").style.left = "10px";
+	} else {
+		document.getElementById("photo-div").style.left = "390px";
+	}
+
 	getTokens(code, json["client_id"], json["client_secret"]).then((data) => {
 		console.log(data);
 

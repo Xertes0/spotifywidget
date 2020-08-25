@@ -19,7 +19,8 @@ if (app.commandLine.hasSwitch("config")) {
 		} catch (err) {}
 		fs.writeFileSync(
 			config_path + "/config.json",
-			'{"client_id": "Your client id","client_secret": "Your client secret","check_if_running": "false"}'
+			'{"client_id": "Your client id","client_secret": "Your client secret", ' +
+				'"position": "top-right","check_if_running": "false"}'
 		);
 
 		no_data();
@@ -41,8 +42,8 @@ if (client_id == "Your client id") {
 function no_data() {
 	console.error(
 		"Put your client id and client secret (https://developer.spotify.com/dashboard) to the " +
-			config_path +
-			"/config.json file!"
+			path.join(config_path, "config.json") +
+			" file!"
 	);
 	app.quit();
 	return;
@@ -75,7 +76,7 @@ function createWindow() {
 		console.log(newUrl);
 
 		const winWidth = 550;
-		const winHeigh = 200;
+		const winHeigh = 170;
 
 		let window;
 		if (app.commandLine.hasSwitch("dev")) {
@@ -106,7 +107,46 @@ function createWindow() {
 			window.setIgnoreMouseEvents(true);
 		}
 
-		window.setPosition(screen.getPrimaryDisplay().size.width - winWidth, 0);
+		const top = json["position"].split("-")[0];
+		const right = json["position"].split("-")[1];
+		console.log(top);
+		console.log(right);
+
+		const sSize = screen.getPrimaryDisplay().size;
+
+		let yPos;
+		switch (top) {
+			case "top": {
+				yPos = 0;
+				break;
+			}
+			case "bottom": {
+				yPos = sSize.height - winHeigh;
+				break;
+			}
+			default: {
+				console.error('Invalid config value of "position"');
+				break;
+			}
+		}
+
+		let xPos;
+		switch (right) {
+			case "right": {
+				xPos = sSize.width - winWidth;
+				break;
+			}
+			case "left": {
+				xPos = 0;
+				break;
+			}
+			default: {
+				console.error('Invalid config value of "position"');
+				break;
+			}
+		}
+
+		window.setPosition(xPos, yPos);
 		window.loadFile("window.html");
 		window.webContents.on("did-finish-load", () => {
 			window.webContents.send("loaded", newUrl.slice(26), json);
