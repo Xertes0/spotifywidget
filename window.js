@@ -1,4 +1,5 @@
 const { ipcRenderer } = require("electron");
+const remote = require("electron").remote;
 const child_process = require("child_process");
 const { isRegExp } = require("util");
 
@@ -105,7 +106,13 @@ function update() {
 	// Check if spotify is running
 	if (process.platform == "linux" && check_if_running)
 		child_process.exec("/usr/bin/pgrep spotify", (err, stdout, sterr) => {
-			if (stdout != "" || !err) update();
+			if (stdout != "" || !err) {
+				remote.getCurrentWindow().showInactive();
+				update();
+			} else {
+				remote.getCurrentWindow().hide();
+				console.log("Spotify instance not found");
+			}
 		});
 	else {
 		update();
