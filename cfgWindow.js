@@ -1,6 +1,6 @@
 const remote = require("electron").remote;
 const path = require("path");
-const { ipcRenderer } = require("electron");
+const { ipcRenderer, shell } = require("electron");
 const cfg_mng = require("./config");
 
 const items = [
@@ -59,3 +59,7 @@ document.getElementById("submit").addEventListener("click", () => {
 
 	ipcRenderer.sendSync("config", json);
 });
+
+function open_dashboard() {
+	shell.openExternal("https://developer.spotify.com/dashboard");
+}
