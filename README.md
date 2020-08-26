@@ -5,14 +5,6 @@ MacOS was NOT tested.
 
 ![Preview](https://i.imgur.com/KYJ3Nes.png)
 
-# Before Running
-
-Put your client id and client secret to the data.json file.
-
-You can find them on this website https://developer.spotify.com/dashboard
-
-Creating an application might be necessary.
-
 # Running
 
 After cloning the repository run these commands to install the dependencies:
