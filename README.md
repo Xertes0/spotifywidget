@@ -34,6 +34,7 @@ npm run dev
 # Command line arguments
 
 All of the arguments are optional
+
 ```
 --dev Developer mode Default with "npm run dev"
 --skip-config-screen Skip configuration window

@@ -24,7 +24,7 @@
 			"category": "Utility"
 		},
 		"win": {
-			"target": "msi"
+			"target": "zip"
 		}
 	},
 	"devDependencies": {
