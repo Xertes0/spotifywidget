@@ -33,6 +33,20 @@ npm run dev
 
 # Building
 
+For Linux:
+
 ```
 npm run build
+```
+
+For Windows:
+
+```
+npm run build_win
+```
+
+All configurations:
+
+```
+npm run build_all
 ```

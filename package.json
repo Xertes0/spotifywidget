@@ -7,8 +7,8 @@
 		"start": "electron .",
 		"dev": "electron . --dev",
 		"build": "electron-builder -l",
-		"buildw": "electron-builder -w",
-		"buildall": "electron-builder -lw"
+		"build_win": "electron-builder -w",
+		"build_all": "electron-builder -lw"
 	},
 	"author": "Xertes0",
 	"license": "GPL-3.0-only",
