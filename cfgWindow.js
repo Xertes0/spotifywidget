@@ -15,8 +15,8 @@ var client_secret;
 
 var config_path;
 let json;
-if (remote.app.commandLine.hasSwitch("config_path")) {
-	config_path = remote.app.commandLine.getSwitchValue("config_path");
+if (remote.app.commandLine.hasSwitch("config-path")) {
+	config_path = remote.app.commandLine.getSwitchValue("config-path");
 	json = cfg_mng.load(config_path, true);
 } else {
 	config_path = path.join(remote.app.getPath("appData"), "spotifywidget");
