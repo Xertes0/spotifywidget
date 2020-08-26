@@ -31,6 +31,15 @@ For debugging purposes use:
 npm run dev
 ```
 
+# Command line arguments
+
+All of the arguments are optional
+```
+--dev Developer mode Default with "npm run dev"
+--skip-config-screen Skip configuration window
+--config-path=<path> Path to the configuration path Default=HOME/.config/spotifywidget/config.json
+```
+
 # Building
 
 For Linux:
