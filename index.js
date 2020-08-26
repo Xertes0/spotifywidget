@@ -148,17 +148,30 @@ function authWindow(json) {
 
 function createWindow() {
 	if (!app.commandLine.hasSwitch("skip-config-screen")) {
-		let cfgWindow = new BrowserWindow({
-			width: 800,
-			height: 600,
-			show: true,
-			webPreferences: {
-				nodeIntegration: true,
-				devTools: false,
-			},
-		});
+		let cfgWindow;
+		if (app.commandLine.hasSwitch("dev")) {
+			cfgWindow = new BrowserWindow({
+				width: 800,
+				height: 600,
+				show: true,
+				webPreferences: {
+					nodeIntegration: true,
+				},
+			});
+		} else {
+			cfgWindow = new BrowserWindow({
+				width: 800,
+				height: 600,
+				show: true,
+				webPreferences: {
+					nodeIntegration: true,
+					devTools: false,
+				},
+			});
 
-		cfgWindow.setMenu(null);
+			cfgWindow.setMenu(null);
+		}
+
 		cfgWindow.loadFile("./cfgWindow.html");
 
 		let by_user = true;
