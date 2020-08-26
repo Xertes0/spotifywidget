@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Config</title>
+	</head>
+	<body>
+		<label for="client_id">Client Id<br /></label>
+		<input type="text" id="client_id" /><br />
+
+		<label for="client_secret">Client Secret<br /></label>
+		<input type="text" id="client_secret" /><br />
+
+		<label for="position">Widget Position<br /></label>
+		<select id="position" name="position">
+			<option value="top-right">Top Right</option>
+			<option value="top-left">Top Left</option>
+			<option value="bottom-right">Bottom Right</option>
+			<option value="bottom-left">Bottom Left</option>
+		</select>
+		<br />
+
+		<label for="check_if_running">Hide widget if spotify is not running</label>
+		<input type="checkbox" id="check_if_running" /><br />
+
+		<label for="white_font">Use White Font</label>
+		<input type="checkbox" id="white_font" /><br />
+
+		<button id="submit">Save & Run</button>
+
+		<script src="./cfgWindow.js"></script>
+	</body>
+</html>

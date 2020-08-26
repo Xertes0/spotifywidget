@@ -1,55 +1,14 @@
 const electron = require("electron");
-const { screen, app, BrowserWindow, ipcMain } = require("electron");
-const fs = require("fs");
 const path = require("path");
+const {
+	screen,
+	app,
+	BrowserWindow,
+	nativeTheme,
+	ipcMain,
+} = require("electron");
 
-let data;
-const config_path = path.join(app.getPath("appData"), "spotifywidget");
-
-if (app.commandLine.hasSwitch("config")) {
-	const data_path = app.commandLine.getSwitchValue("config");
-	console.log(data_path);
-	data = fs.readFileSync(data_path);
-} else {
-	try {
-		data = fs.readFileSync(config_path + "/config.json");
-	} catch (err) {
-		try {
-			fs.mkdirSync(config_path);
-		} catch (err) {}
-		fs.writeFileSync(
-			config_path + "/config.json",
-			'{"client_id": "Your client id","client_secret": "Your client secret", ' +
-				'"position": "top-right","check_if_running": "false"}'
-		);
-
-		no_data();
-		return;
-	}
-}
-
-const json = JSON.parse(data);
-
-console.log(json);
-
-const client_id = json["client_id"];
-
-if (client_id == "Your client id") {
-	no_data();
-	return;
-}
-
-function no_data() {
-	console.error(
-		"Put your client id and client secret (https://developer.spotify.com/dashboard) to the " +
-			path.join(config_path, "config.json") +
-			" file!"
-	);
-	app.quit();
-	return;
-}
-
-function createWindow() {
+function authWindow(json) {
 	let authWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
@@ -58,20 +17,33 @@ function createWindow() {
 		"web-security": false,
 	});
 
+	let by_user = true;
+	authWindow.on("closed", () => {
+		if (by_user) app.quit();
+	});
+
 	const authUrl =
 		"https://accounts.spotify.com/authorize?client_id=" +
-		client_id +
+		json["client_id"] +
 		"&response_type=code&redirect_uri=https%3A%2F%2Fexample.com&scope=user-read-currently-playing";
 
 	console.log(authUrl);
 
 	authWindow.loadURL(authUrl);
-	authWindow.show();
+
+	function show() {
+		try {
+			authWindow.show();
+		} catch (err) {}
+	}
+	setTimeout(show, 1000);
 
 	authWindow.webContents.on("will-redirect", function (event, newUrl) {
 		if (!newUrl.startsWith("https://example.com")) {
 			return;
 		}
+		by_user = false;
+		authWindow.close();
 
 		console.log(newUrl);
 
@@ -152,7 +124,7 @@ function createWindow() {
 			window.webContents.send("loaded", newUrl.slice(26), json);
 		});
 		window.on("closed", () => {
-			window = null;
+			app.quit();
 		});
 		window.webContents.on(
 			"console-message",
@@ -169,18 +141,45 @@ function createWindow() {
 				);
 			}
 		);
-		authWindow.close();
 	});
+}
+
+function createWindow() {
+	if (!app.commandLine.hasSwitch("skip-config-screen")) {
+		let cfgWindow = new BrowserWindow({
+			width: 800,
+			height: 600,
+			show: true,
+			webPreferences: {
+				nodeIntegration: true,
+			},
+		});
+
+		cfgWindow.loadFile("./cfgWindow.html");
+
+		let by_user = true;
+		cfgWindow.on("closed", () => {
+			if (by_user) app.quit();
+		});
+
+		ipcMain.on("config", (event, arg) => {
+			console.log(arg);
+			by_user = false;
+			cfgWindow.close();
+			cfgWindow = null;
+			authWindow(arg);
+		});
+	} else {
+		const json = require("./config").load(
+			path.join(app.getPath("appData"), "spotifywidget")
+		);
+		authWindow(json);
+	}
 }
 
 app.whenReady().then(createWindow);
 
-app.on("window-all-closed", () => {
-	console.error("window all closed");
-	if (process.platform != "darwin") {
-		app.quit();
-	}
-});
+app.on("window-all-closed", () => {});
 
 app.on("activate", () => {
 	if (BrowserWindow.getAllWindows.length === 0) {
