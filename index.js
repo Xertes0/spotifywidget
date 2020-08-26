@@ -17,6 +17,8 @@ function authWindow(json) {
 		"web-security": false,
 	});
 
+	authWindow.setMenu(null);
+
 	let by_user = true;
 	authWindow.on("closed", () => {
 		if (by_user) app.quit();
@@ -152,9 +154,11 @@ function createWindow() {
 			show: true,
 			webPreferences: {
 				nodeIntegration: true,
+				devTools: false,
 			},
 		});
 
+		cfgWindow.setMenu(null);
 		cfgWindow.loadFile("./cfgWindow.html");
 
 		let by_user = true;
