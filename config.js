@@ -2,6 +2,13 @@ const path = require("path");
 const fs = require("fs");
 
 module.exports = {
+	items: [
+		"client_id",
+		"client_secret",
+		"position",
+		"check_if_running",
+		"white_font",
+	],
 	load: function (config_path, is_custom = false) {
 		let data;
 		console.log(config_path);

@@ -14,7 +14,7 @@
 	"license": "GPL-3.0-only",
 	"build": {
 		"productName": "Spotify Widget",
-		"artifactName": "SpotifyWidget-${version}_${os}_${arch}",
+		"artifactName": "spotifywidget-${version}_${os}_${arch}",
 		"appId": "io.Xertes0.SpotifyWidget",
 		"directories": {
 			"output": "./build"

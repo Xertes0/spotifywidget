@@ -3,13 +3,7 @@ const path = require("path");
 const { ipcRenderer, shell } = require("electron");
 const cfg_mng = require("./config");
 
-const items = [
-	"client_id",
-	"client_secret",
-	"position",
-	"check_if_running",
-	"white_font",
-];
+const items = cfg_mng.items;
 
 var client_secret;
 
