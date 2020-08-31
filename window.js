@@ -130,6 +130,12 @@ ipcRenderer.on("loaded", (event, code, json) => {
 	} else {
 		document.getElementById("photo-div").style.left = "390px";
 	}
+	if (json["position"].split("-")[0] == "bottom") {
+		let main = document.getElementById("main");
+		main.style.position = "absolute";
+		main.style.bottom = 0;
+		main.style.marginBottom = "10px";
+	}
 
 	getTokens(code, json["client_id"], json["client_secret"]).then((data) => {
 		console.log(data);
